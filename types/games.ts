@@ -1,11 +1,17 @@
 export interface IGamesListProps {
     filteredGames: IGamesMockData[];
-    navigateTo: (path:string, game: IGamesMockData | null) => void;
+    navigateTo: (path:string, game?: IGamesMockData | null) => void;
 }
 
 export interface IGameCardProps {
     game: IGamesMockData;
-    navigateTo: (path:string, game: IGamesMockData | null) => void;
+    navigateTo: (path:string, game?: IGamesMockData | null) => void;
+}
+
+export interface IGameDetailsProps {
+    selectedGame: IGamesMockData;
+    navigateTo: (path:string) => void;
+    handleAddToCart: (game:IGamesMockData) => void;
 }
 
 export interface IGamesMockData {
