@@ -1,6 +1,7 @@
 import NavbarComponent from './navbar';
 import CartDrawerComponent from './ui/cart';
 import { useStore } from '../store/store';
+import FooterComponent from './ui/footer';
 
 export default function Layout({ children }) {
     const { cart,
@@ -33,6 +34,8 @@ export default function Layout({ children }) {
                     handleRemoveFromCart={handleRemoveFromCart}
                 />
             )}
+
+            <FooterComponent/>
         </div>
     );
 }

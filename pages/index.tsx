@@ -1,11 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { create } from 'zustand';
+import { useState, useMemo } from 'react';
 import styles from '../styles/home.module.css'
-import NavbarComponent from '../components/navbar';
-import GameDetailsComponent from '../components/screens/details';
 import FrontPageComponent from '../components/screens/frontpage';
-import ProfileComponent from '../components/screens/profile';
-import CartDrawerComponent from '../components/ui/cart';
 import LoadingComponent from '../components/ui/loading';
 import { MOCK_GAMES } from '../mock/data';
 import { IGamesMockData } from '../types/games';
@@ -14,7 +9,6 @@ import { useStore } from '../store/store';
 import Layout from '../components/layout';
 
 function Home() {
-  const [view, setView] = useState('home');
   const [selectedGame, setSelectedGame] = useState<IGamesMockData | null>(null);
   const [filter, setFilter] = useState('All');
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +19,6 @@ function Home() {
     setIsLoading(true);
     setTimeout(() => {
       setSelectedGame(game);
-      setView(path);
       setIsLoading(false);
     }, 600);
   };
