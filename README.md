@@ -1,3 +1,18 @@
+ {/*{view === 'detail' && selectedGame && (
+                <GameDetailsComponent
+                  navigateTo={navigateTo}
+                  selectedGame={selectedGame}
+                  handleAddToCart={handleAddToCart}
+                />
+              )}
+
+              {view === 'profile' &&
+                <ProfileComponent />
+              }
+            </>
+          )}
+        </div>*/}
+        
 # GitHub Codespaces ♥️ Next.js
 
 Welcome to your shiny new Codespace running Next.js! We've got everything fired up and running for you to explore Next.js.
