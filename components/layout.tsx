@@ -8,7 +8,6 @@ export default function Layout({ children }) {
         toggleCart,
         isCartOpen,
         removeFromCart,
-        navigateTo,
         handleSearch } = useStore();
 
     const handleRemoveFromCart = (id: number) => {
@@ -19,7 +18,6 @@ export default function Layout({ children }) {
         <div className="min-h-screen bg-[#1b2838] text-gray-200 font-sans">
             <NavbarComponent
                 title={'Project Gamehouse'}
-                navigateTo={navigateTo}
                 cart={cart}
                 toggleCart={toggleCart}
                 handleSearch={handleSearch}

@@ -1,7 +1,8 @@
+import { IGame } from "./games";
+
 export interface INavbarProps {
     title: string;
-    navigateTo: (newView: any, game?: null) => void;
-    cart: [];
+    cart: IGame[];
     toggleCart: () => void;
     handleSearch: (value: string) => void;
 }
