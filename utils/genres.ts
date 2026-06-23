@@ -1,5 +1,5 @@
 import { MOCK_GAMES } from "../mock/data";
-import { IGamesMockData } from "../types/games";
+import { IGame } from "../types/games";
 import { TGenres } from "../types/genres";
 
 export const getGenres = (): TGenres[] => {
@@ -14,7 +14,7 @@ export const getGenres = (): TGenres[] => {
   return g;
 }
 
-export const filterGames = (games: IGamesMockData[], filter: TGenres, query: string) => {
+export const filterGames = (games: IGame[], filter: TGenres, query: string) => {
   return games.filter(g =>
         (filter === 'All' || g.genre === filter) &&
         g.name.toLowerCase().includes(query.toLowerCase())
