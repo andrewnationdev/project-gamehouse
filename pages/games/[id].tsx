@@ -73,6 +73,7 @@ export default function GamesPage() {
                             background_image={selectedGame.img} 
                             description_raw={selectedGame.desc} 
                             comments={[]}
+                            specs={selectedGame.specs}
                             handleAddToCart={addToCart}
                         />
                     )}
