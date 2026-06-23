@@ -2,8 +2,17 @@ import React from 'react';
 import { ShoppingCart, Search, User, Gamepad2 } from 'lucide-react';
 import { INavbarProps } from '../types/navbar';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function NavbarComponent(props: INavbarProps) {
+    const router = useRouter();
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            router.push(`/`);
+        }
+    };
+
     return <nav className="bg-[#171a21] p-4 flex items-center justify-between sticky top-0 z-10 shadow-lg border-b border-[#2a475e]">
         <Link href="/"><h1
             className="text-xl flex gap-4 align-center font-bold cursor-pointer text-white hover:text-blue-400 transition"
@@ -14,7 +23,12 @@ export default function NavbarComponent(props: INavbarProps) {
         <div className="flex gap-4 items-center">
             <div className="relative">
                 <Search className="absolute left-2 top-2 text-gray-400" size={18} />
-                <input className="bg-[#2a475e] pl-8 p-1 rounded text-sm w-32 md:w-48 transition-all focus:w-64" placeholder="Buscar..." onChange={(e) => props.handleSearch(e.target.value)} />
+                <input 
+                className="bg-[#2a475e] pl-8 p-1 rounded text-sm w-32 md:w-48 transition-all focus:w-64" 
+                placeholder="Digite aqui para buscar..." 
+                onChange={(e) => props.handleSearch(e.target.value)} 
+                onKeyDown={handleKeyDown}
+                />
             </div>
             <Link
                 href="/user/amazing_235"

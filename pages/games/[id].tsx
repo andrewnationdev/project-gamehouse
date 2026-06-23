@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { useQuery } from '@tanstack/react-query';
 import { fetchGameDetails } from '../../services/api';
 import { IGame } from "../../types/games";
+import StatusMessage from "../../components/ui/status_message";
+import { calculateGamePrice } from "../../utils/data";
 
 export default function GamesPage() {
     const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
@@ -17,7 +19,7 @@ export default function GamesPage() {
 
     const { addToCart } = useStore();
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['game', id],
         queryFn: () => fetchGameDetails(id as string),
         enabled: !!id,
@@ -60,15 +62,18 @@ export default function GamesPage() {
                     className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
                     {isLoading || !selectedGame ? (
                         <LoadingComponent />
-                    ) : (
+                    ) : isError ? <StatusMessage
+                        type="error"
+                        message="ERRO DESCONHECIDO NO SERVIDOR. TENTE NOVAMENTE MAIS TARDE."
+                    /> : (
                         <GameDetailsComponent
                             id={selectedGame.id}
-                            name={selectedGame.name}
-                            price={0.00}
-                            genre={selectedGame.genre} 
-                            rating={selectedGame.rating} 
-                            background_image={selectedGame.background_image} 
-                            description_raw={selectedGame.description_raw} 
+                            name={`${selectedGame.name} (${selectedGame.released.split('-')[0]})`}
+                            price={calculateGamePrice(selectedGame.released)}
+                            genre={selectedGame.genre}
+                            rating={selectedGame.rating}
+                            background_image={selectedGame.background_image}
+                            description_raw={selectedGame.description_raw}
                             comments={[]}
                             specs={selectedGame.specs}
                             handleAddToCart={addToCart}

@@ -7,12 +7,13 @@ import { useStore } from '../store/store';
 import Layout from '../components/layout';
 import { fetchGames } from '../services/api';
 import { useQuery } from '@tanstack/react-query';
+import { calculateGamePrice } from '../utils/data';
 
 function Home() {
   const [filter, setFilter] = useState('All');
   const { setGames, search, games } = useStore();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['games'],
     queryFn: () => fetchGames(),
   });
@@ -22,7 +23,7 @@ function Home() {
       const formatted = data.results.map(g => ({
         id: g.id,
         name: g.name,
-        price: 99.90,
+        price: calculateGamePrice(g.released),
         description_raw: g.description_raw,
         genre: g.genres[0]?.name,
         rating: g.rating,
@@ -31,6 +32,8 @@ function Home() {
         specs: [],
         comments: []
       }));
+
+      console.log(data)
 
       setGames(formatted);
     }
@@ -51,14 +54,15 @@ function Home() {
         <div className="min-h-screen bg-[#1b2838] text-gray-200 font-sans transition-all duration-500">
           <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
             {isLoading ? (
-              <LoadingComponent />
-            ) : (
-              <FrontPageComponent
-                filter={filter}
-                handleChangeFilter={handleChangeFilter}
-                filteredGames={filteredGames}
-              />
-            )}
+            <LoadingComponent />
+          ) : (
+            <FrontPageComponent
+              filter={filter}
+              handleChangeFilter={(v) => setFilter(v)}
+              filteredGames={filteredGames}
+              isError={isError}
+            />
+          )}
           </div>
         </div>
       </main>

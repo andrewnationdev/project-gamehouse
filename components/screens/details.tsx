@@ -22,7 +22,7 @@ export default function GameDetailsComponent(props: IGame) {
             </div>
 
             <div className="mt-6 flex items-center justify-between">
-                <span className="text-3xl font-bold text-green-400">R$ {(Math.random() * 500).toFixed(2)}</span>
+                <span className="text-3xl font-bold text-green-400">R$ {props.price.toFixed(2)}</span>
                 <button onClick={() => props.handleAddToCart(props)} className="bg-green-600 px-8 py-3 rounded font-bold text-white hover:bg-green-500 transition shadow-lg">Adicionar ao Carrinho</button>
             </div>
 

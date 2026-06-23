@@ -7,8 +7,8 @@ export default function ProfileComponent(props: IPlayerProfile) {
         <h2 className="text-2xl mt-4 font-bold">{props.username}</h2>
         <p className="text-gray-400">Membro desde {props.memberSince}</p>
         <div className="mt-6 flex justify-center gap-4">
-            <button className="flex items-center gap-2 bg-[#171a21] px-4 py-2 rounded"><Award size={18} /> Conquistas</button>
-            <button className="flex items-center gap-2 bg-[#171a21] px-4 py-2 rounded"><Settings size={18} /> Configurações</button>
+            <button className="flex items-center gap-2 bg-[#171a21] px-4 py-2 rounded cursor-pointer hover:bg-[#2d3342]"><Award size={18} /> Conquistas</button>
+            <button className="flex items-center gap-2 bg-[#171a21] px-4 py-2 rounded cursor-pointer hover:bg-[#2d3342]"><Settings size={18} /> Configurações</button>
         </div>
     </div>
 }
