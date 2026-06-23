@@ -2,29 +2,26 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import styles from '../../styles/home.module.css'
 import LoadingComponent from "../../components/ui/loading";
-import { IGamesMockData } from "../../types/games";
 import GameDetailsComponent from "../../components/screens/details";
 import { useStore } from "../../store/store";
-import { MOCK_GAMES } from "../../mock/data";
 import { useRouter } from "next/router";
 import { useQuery } from '@tanstack/react-query';
 import { fetchGameDetails } from '../../services/api';
+import { IGame } from "../../types/games";
 
 export default function GamesPage() {
-    const [selectedGame, setSelectedGame] = useState<IGamesMockData | null>(null);
+    const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
 
     const router = useRouter();
     const { id } = router.query;
 
-    const { addToCart, games } = useStore();
+    const { addToCart } = useStore();
 
     const { data, isLoading } = useQuery({
         queryKey: ['game', id],
         queryFn: () => fetchGameDetails(id as string),
         enabled: !!id,
     });
-
-    console.log(data)
 
     useEffect(() => {
         if (data) {
@@ -42,11 +39,11 @@ export default function GamesPage() {
                 id: data.id,
                 name: data.name,
                 price: 99.90,
-                desc: data.description_raw,
+                description_raw: data.description_raw,
                 genre: data.genres[0]?.name,
                 rating: data.rating,
                 class: data.esrb_rating?.name || "Livre",
-                img: data.background_image,
+                background_image: data.background_image,
                 specs: specsArray,
                 comments: []
             };
@@ -70,8 +67,8 @@ export default function GamesPage() {
                             price={0.00}
                             genre={selectedGame.genre} 
                             rating={selectedGame.rating} 
-                            background_image={selectedGame.img} 
-                            description_raw={selectedGame.desc} 
+                            background_image={selectedGame.background_image} 
+                            description_raw={selectedGame.description_raw} 
                             comments={[]}
                             specs={selectedGame.specs}
                             handleAddToCart={addToCart}

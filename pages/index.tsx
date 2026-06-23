@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect } from 'react';
 import styles from '../styles/home.module.css'
 import FrontPageComponent from '../components/screens/frontpage';
 import LoadingComponent from '../components/ui/loading';
-import { IGamesMockData } from '../types/games';
 import { filterGames } from '../utils/genres';
 import { useStore } from '../store/store';
 import Layout from '../components/layout';
@@ -12,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 function Home() {
   const [filter, setFilter] = useState('All');
   const { setGames, search, games } = useStore();
-  
+
   const { data, isLoading } = useQuery({
     queryKey: ['games'],
     queryFn: () => fetchGames(),
@@ -28,24 +27,23 @@ function Home() {
         genre: g.genres[0]?.name,
         rating: g.rating,
         class: g.esrb_rating?.name,
-        img: g.background_image,
+        background_image: g.background_image,
         specs: [],
         comments: []
       }));
-      
+
       setGames(formatted);
     }
   }, [data, setGames]);
-
-  const navigateTo = (path: string, game: IGamesMockData | null = null) => {
-  };
 
   const handleChangeFilter = (value: string) => {
     setFilter(value);
   }
 
-  const filteredGames = useMemo(() =>
-    filterGames(games, filter, search), [search, filter]);
+  const filteredGames = useMemo(() => {
+    if (!games || games.length === 0) return [];
+    return filterGames(games, filter, search);
+  }, [search, filter, games]);
 
   return (
     <Layout>
@@ -57,7 +55,6 @@ function Home() {
             ) : (
               <FrontPageComponent
                 filter={filter}
-                navigateTo={navigateTo}
                 handleChangeFilter={handleChangeFilter}
                 filteredGames={filteredGames}
               />

@@ -1,11 +1,9 @@
 export interface IGamesListProps {
     filteredGames: IGame[];
-    navigateTo: (path:string, game?: IGame | null) => void;
 }
 
 export interface IGameCardProps {
     game: IGame;
-    navigateTo: (path:string, game?: IGame | null) => void;
 }
 
 export interface IGameDetailsProps {

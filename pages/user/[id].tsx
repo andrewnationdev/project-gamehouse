@@ -4,11 +4,13 @@ import Layout from "../../components/layout";
 import ProfileComponent from "../../components/screens/profile";
 import LoadingComponent from "../../components/ui/loading";
 import { useStore } from "../../store/store";
+import { useRouter } from "next/router";
+import { getRandomYear } from "../../utils/data";
 
 export default function ProfilePages() {
     const [isLoading, setIsLoading] = useState(true);
-
-    const { search } = useStore();
+    const router = useRouter();
+    const { id } = router.query;
 
     useEffect(() => {
         setTimeout(() => {
@@ -24,7 +26,7 @@ export default function ProfilePages() {
                     {isLoading ? (
                         <LoadingComponent />
                     ) : (
-                        <ProfileComponent />
+                        <ProfileComponent username={String(id)} memberSince={getRandomYear()} />
                     )}
                 </div>
             </div>

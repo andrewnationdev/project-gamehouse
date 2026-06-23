@@ -10,7 +10,6 @@ export default function FrontPageComponent(props:IFrontPageProps) {
         />
         <GamesListComponent
             filteredGames={props.filteredGames!}
-            navigateTo={props.navigateTo}
         />
     </main>
 }
