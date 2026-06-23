@@ -1,26 +1,43 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import styles from '../styles/home.module.css'
 import FrontPageComponent from '../components/screens/frontpage';
 import LoadingComponent from '../components/ui/loading';
-import { MOCK_GAMES } from '../mock/data';
 import { IGamesMockData } from '../types/games';
 import { filterGames } from '../utils/genres';
 import { useStore } from '../store/store';
 import Layout from '../components/layout';
+import { fetchGames } from '../services/api';
+import { useQuery } from '@tanstack/react-query';
 
 function Home() {
-  const [selectedGame, setSelectedGame] = useState<IGamesMockData | null>(null);
   const [filter, setFilter] = useState('All');
-  const [isLoading, setIsLoading] = useState(false);
+  const { setGames, search, games } = useStore();
+  
+  const { data, isLoading } = useQuery({
+    queryKey: ['games'],
+    queryFn: () => fetchGames(),
+  });
 
-  const { search } = useStore();
+  useEffect(() => {
+    if (data) {
+      const formatted = data.results.map(g => ({
+        id: g.id,
+        name: g.name,
+        price: 99.90,
+        description_raw: g.description_raw,
+        genre: g.genres[0]?.name,
+        rating: g.rating,
+        class: g.esrb_rating?.name,
+        img: g.background_image,
+        specs: [],
+        comments: []
+      }));
+      
+      setGames(formatted);
+    }
+  }, [data, setGames]);
 
   const navigateTo = (path: string, game: IGamesMockData | null = null) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setSelectedGame(game);
-      setIsLoading(false);
-    }, 600);
   };
 
   const handleChangeFilter = (value: string) => {
@@ -28,7 +45,7 @@ function Home() {
   }
 
   const filteredGames = useMemo(() =>
-    filterGames(MOCK_GAMES, filter, search), [search, filter]);
+    filterGames(games, filter, search), [search, filter]);
 
   return (
     <Layout>

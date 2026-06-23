@@ -1,30 +1,43 @@
 export interface IGamesListProps {
-    filteredGames: IGamesMockData[];
-    navigateTo: (path:string, game?: IGamesMockData | null) => void;
+    filteredGames: IGame[];
+    navigateTo: (path:string, game?: IGame | null) => void;
 }
 
 export interface IGameCardProps {
-    game: IGamesMockData;
-    navigateTo: (path:string, game?: IGamesMockData | null) => void;
+    game: IGame;
+    navigateTo: (path:string, game?: IGame | null) => void;
 }
 
 export interface IGameDetailsProps {
-    selectedGame: IGamesMockData;
+    selectedGame: IGame;
     navigateTo: (path:string) => void;
-    handleAddToCart: (game:IGamesMockData) => void;
 }
 
-export interface IGamesMockData {
+export interface ICart {
+  handleAddToCart?: (game:IGame) => void;
+}
+
+export interface IGameComment {
+  user: string;
+  text: string;
+}
+
+export interface IGame extends ICart {
   id: number;
   name: string;
   price: number;
-  desc: string;
   genre: string;
   rating: number;
-  class: string;
-  img: string;
-  specs: string[];
-  comments: IComments[];
+  background_image: string;
+  description_raw: string;
+  
+  slug?: string;
+  class?: string;
+  specs?: string[];
+  comments: IGameComment[];
+  
+  platforms?: Array<{
+    platform: { name: string };
+    requirements?: { minimum?: string; recommended?: string };
+  }>;
 }
-
-export interface IComments { user: string; text: string; }

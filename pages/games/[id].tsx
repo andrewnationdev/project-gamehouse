@@ -16,7 +16,7 @@ export default function GamesPage() {
     const router = useRouter();
     const { id } = router.query;
 
-    const { addToCart } = useStore();
+    const { addToCart, games } = useStore();
 
     const { data, isLoading } = useQuery({
         queryKey: ['game', id],
@@ -26,17 +26,34 @@ export default function GamesPage() {
 
     console.log(data)
 
-    const navigateTo = (path: string, game: IGamesMockData | null = null) => {
-
-    };
-
     useEffect(() => {
-        const game = MOCK_GAMES.find((g) => String(g.id) == id);
+        if (data) {
+            const pcPlatform = data.platforms?.find(p => p.platform.slug === 'pc');
+            const minSpecs = pcPlatform?.requirements?.minimum || "Não informado";
+            const recSpecs = pcPlatform?.requirements?.recommended || "Não informado";
 
-        if (game) {
-            setSelectedGame(game);
+            const specsArray = [
+                `Mínimo: ${minSpecs.replace('Minimum:', '')}`,
+                `Recomendado: ${recSpecs.replace('Recommended:', '')}`
+            ];
+
+            const formatted = {
+                ...data,
+                id: data.id,
+                name: data.name,
+                price: 99.90,
+                desc: data.description_raw,
+                genre: data.genres[0]?.name,
+                rating: data.rating,
+                class: data.esrb_rating?.name || "Livre",
+                img: data.background_image,
+                specs: specsArray,
+                comments: []
+            };
+
+            setSelectedGame(formatted);
         }
-    }, [id])
+    }, [data]);
 
     return <Layout>
         <main className={styles.main}>
@@ -44,12 +61,18 @@ export default function GamesPage() {
                 className="min-h-screen bg-[#1b2838] text-gray-200 font-sans transition-all duration-500">
                 <div
                     className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-                    {isLoading ? (
+                    {isLoading || !selectedGame ? (
                         <LoadingComponent />
                     ) : (
                         <GameDetailsComponent
-                            navigateTo={navigateTo}
-                            selectedGame={selectedGame}
+                            id={selectedGame.id}
+                            name={selectedGame.name}
+                            price={0.00}
+                            genre={selectedGame.genre} 
+                            rating={selectedGame.rating} 
+                            background_image={selectedGame.img} 
+                            description_raw={selectedGame.desc} 
+                            comments={[]}
                             handleAddToCart={addToCart}
                         />
                     )}
