@@ -74,7 +74,16 @@ export default function GamesPage() {
                             rating={selectedGame.rating}
                             background_image={selectedGame.background_image}
                             description_raw={selectedGame.description_raw}
-                            comments={[]}
+                            comments={[{
+                                user: "gamestealer92",
+                                text: "Mó daora esse jogo! Parabéns aos criadores!"
+                            },{
+                                user: "profit12",
+                                text: "Péssimo!"
+                            }, {
+                                user: "andrewnation21",
+                                text: "Curti."
+                            }]}
                             specs={selectedGame.specs}
                             handleAddToCart={addToCart}
                         />

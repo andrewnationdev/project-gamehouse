@@ -1,16 +1,22 @@
 import { ChevronLeft, Star } from "lucide-react";
 import { IGame } from "../../types/games";
 import Link from "next/link";
+import { useStore } from "../../store/store";
 
 export default function GameDetailsComponent(props: IGame) {
+    const { cart } = useStore();
+
+    const isAlreadyInCart = ():boolean => {
+        return cart.some((item) => item.id == props.id);
+    }
 
     return <div className="p-6 max-w-4xl mx-auto animate-in slide-in-from-bottom-8 duration-500">
         <Link href="/" className="flex items-center gap-2 mb-4 hover:text-white transition"><ChevronLeft /> Voltar</Link>
         <div className="bg-[#2a475e] p-6 rounded shadow-xl">
             <div className="my-6 overflow-hidden rounded-xl shadow-2xl border border-gray-700">
-                <img 
-                    src={props.background_image} 
-                    alt={props.name} 
+                <img
+                    src={props.background_image}
+                    alt={props.name}
                     className="w-full h-80 object-cover hover:scale-125 transition-transform duration-500"
                 />
             </div>
@@ -23,7 +29,12 @@ export default function GameDetailsComponent(props: IGame) {
 
             <div className="mt-6 flex items-center justify-between">
                 <span className="text-3xl font-bold text-green-400">R$ {props.price.toFixed(2)}</span>
-                <button onClick={() => props.handleAddToCart(props)} className="bg-green-600 px-8 py-3 rounded font-bold text-white hover:bg-green-500 transition shadow-lg">Adicionar ao Carrinho</button>
+                <button
+                    disabled={isAlreadyInCart()}
+                    onClick={() => props.handleAddToCart(props)}
+                    className={`px-8 py-3 rounded font-bold text-white shadow-lg ${isAlreadyInCart() ? "bg-green-900 cursor-not-allowed" : "bg-green-600 px-8 py-3 cursor-pointer rounded font-bold text-white hover:bg-green-500 transition"}`}>
+                    Adicionar ao Carrinho
+                </button>
             </div>
 
             <p className="mt-4 text-gray-300 italic leading-relaxed">{props.description_raw}</p>
