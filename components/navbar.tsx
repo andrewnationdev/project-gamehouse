@@ -7,8 +7,7 @@ export default function NavbarComponent(props: INavbarProps) {
     return <nav className="bg-[#171a21] p-4 flex items-center justify-between sticky top-0 z-10 shadow-lg border-b border-[#2a475e]">
         <Link href="/"><h1
             className="text-xl flex gap-4 align-center font-bold cursor-pointer text-white hover:text-blue-400 transition"
-            onClick={() => props.navigateTo('home')}>
-            <Gamepad2 />
+        ><Gamepad2 />
             {props.title}
         </h1>
         </Link>
@@ -18,7 +17,7 @@ export default function NavbarComponent(props: INavbarProps) {
                 <input className="bg-[#2a475e] pl-8 p-1 rounded text-sm w-32 md:w-48 transition-all focus:w-64" placeholder="Buscar..." onChange={(e) => props.handleSearch(e.target.value)} />
             </div>
             <Link
-                href="/user"
+                href="/user/amazing_235"
                 className="cursor-pointer hover:text-blue-400 transition">
                 <User size={30} />
             </Link>

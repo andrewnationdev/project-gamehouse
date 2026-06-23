@@ -1,9 +1,10 @@
 import { ChevronLeft, Star } from "lucide-react";
 import { IGameDetailsProps } from "../../types/games";
+import Link from "next/link";
 
-export default function GameDetailsComponent(props:IGameDetailsProps) {
+export default function GameDetailsComponent(props: IGameDetailsProps) {
     return <div className="p-6 max-w-4xl mx-auto animate-in slide-in-from-bottom-8 duration-500">
-        <button onClick={() => props.navigateTo('home')} className="flex items-center gap-2 mb-4 hover:text-white transition"><ChevronLeft /> Voltar</button>
+        <Link href="/" className="flex items-center gap-2 mb-4 hover:text-white transition"><ChevronLeft /> Voltar</Link>
         <div className="bg-[#2a475e] p-6 rounded shadow-xl">
             <h2 className="text-3xl font-bold text-white">{props.selectedGame.name}</h2>
             <div className="flex items-center gap-4 mt-2">
@@ -35,5 +36,5 @@ export default function GameDetailsComponent(props:IGameDetailsProps) {
                 </div>
             </div>
         </div>
-    </div>
+    </div >
 }

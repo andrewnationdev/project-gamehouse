@@ -2,7 +2,7 @@ import { IFiltersProps } from "../types/genres";
 import { getGenres } from "../utils/genres";
 
 export default function FiltersComponent(props:IFiltersProps) {
-    return <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+    return <div className="flex gap-2 mb-6 flex-wrap overflow-x-auto pb-2">
         {getGenres().map(f => (
             <button 
             key={f} 
