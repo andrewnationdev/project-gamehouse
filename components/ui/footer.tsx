@@ -7,9 +7,9 @@ export default function FooterComponent(){
                 </div>
                 
                 <div className="flex gap-6 text-sm">
-                    <a href="https://github.com/seu-usuario/seu-repositorio" target="_blank" className="hover:text-blue-400 transition">Repositório</a>
-                    <a href="https://rawg.io/apidocs" target="_blank" className="hover:text-blue-400 transition">RAWG.io</a>
-                    <a href="#" className="hover:text-blue-400 transition">Mais Projetos</a>
+                    <a href="https://github.com/andrewnationdev/project-gamehouse" target="_blank" className="hover:text-blue-400 transition">Repositório</a>
+                    <a href="https://rawg.io" target="_blank" className="hover:text-blue-400 transition">RAWG.io</a>
+                    <a href="https://andrewnationdev.vercel.app/docs/category/novos-projetos-2026" className="hover:text-blue-400 transition">Mais Projetos</a>
                 </div>
 
                 <div className="text-xs">
