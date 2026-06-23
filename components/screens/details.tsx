@@ -11,7 +11,7 @@ export default function GameDetailsComponent(props: IGame) {
                 <img 
                     src={props.background_image} 
                     alt={props.name} 
-                    className="w-full h-80 object-cover hover:scale-105 transition-transform duration-500"
+                    className="w-full h-80 object-cover hover:scale-125 transition-transform duration-500"
                 />
             </div>
             <h2 className="text-3xl font-bold text-white">{props.name}</h2>
