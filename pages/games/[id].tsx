@@ -7,30 +7,34 @@ import GameDetailsComponent from "../../components/screens/details";
 import { useStore } from "../../store/store";
 import { MOCK_GAMES } from "../../mock/data";
 import { useRouter } from "next/router";
+import { useQuery } from '@tanstack/react-query';
+import { fetchGameDetails } from '../../services/api';
 
 export default function GamesPage() {
-    const [isLoading, setIsLoading] = useState(true);
     const [selectedGame, setSelectedGame] = useState<IGamesMockData | null>(null);
 
     const router = useRouter();
-    const {id} = router.query;
+    const { id } = router.query;
 
     const { addToCart } = useStore();
 
+    const { data, isLoading } = useQuery({
+        queryKey: ['game', id],
+        queryFn: () => fetchGameDetails(id as string),
+        enabled: !!id,
+    });
+
+    console.log(data)
+
     const navigateTo = (path: string, game: IGamesMockData | null = null) => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setSelectedGame(game);
-            setIsLoading(false);
-        }, 600);
+
     };
 
     useEffect(() => {
         const game = MOCK_GAMES.find((g) => String(g.id) == id);
-        
-        if(game){
+
+        if (game) {
             setSelectedGame(game);
-            setIsLoading(false);
         }
     }, [id])
 
