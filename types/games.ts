@@ -28,6 +28,8 @@ export interface IGame extends ICart {
   rating: number;
   background_image: string;
   description_raw: string;
+
+  released?: string;
   
   slug?: string;
   class?: string;
