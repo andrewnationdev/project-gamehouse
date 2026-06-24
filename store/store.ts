@@ -1,17 +1,5 @@
 import { create } from 'zustand';
-import { IGame } from '../types/games';
-
-interface IStore {
-  cart: IGame[] | [];
-  isCartOpen: boolean;
-  search: string;
-  games: IGame[] | [];
-  setGames: (newGames: IGame[]) => void;
-  addToCart: (game: IGame) => void;
-  removeFromCart: (id: number) => void;
-  toggleCart: () => void;
-  handleSearch: (value: string) => void;
-}
+import {IStore} from '../types/store';
 
 export const useStore = create(<IStore>(set) => ({
   cart: [],
