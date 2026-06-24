@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchGameDetails } from '../../services/api';
 import { IGame } from "../../types/games";
 import StatusMessage from "../../components/ui/elements/status_message";
-import { calculateGamePrice } from "../../utils/data";
+import { calculateGamePrice, parsePcSpecs } from "../../utils/data";
 
 export default function GamesPage() {
     const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
@@ -28,12 +28,10 @@ export default function GamesPage() {
     useEffect(() => {
         if (data) {
             const pcPlatform = data.platforms?.find(p => p.platform.slug === 'pc');
-            const minSpecs = pcPlatform?.requirements?.minimum || "Não informado";
-            const recSpecs = pcPlatform?.requirements?.recommended || "Não informado";
+            const minimumSpecs = parsePcSpecs(pcPlatform?.requirements?.minimum);
 
             const specsArray = [
-                `Mínimo: ${minSpecs.replace('Minimum:', '')}`,
-                `Recomendado: ${recSpecs.replace('Recommended:', '')}`
+                ...minimumSpecs
             ];
 
             const formatted = {
