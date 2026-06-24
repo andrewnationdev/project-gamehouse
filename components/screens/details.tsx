@@ -51,7 +51,7 @@ export default function GameDetailsComponent(props: IGame) {
                 <div className="space-y-4">
                     {props.comments.map((c, i) => (
                         <div key={i} className="border-b border-gray-700 pb-2 last:border-0">
-                            <p className="text-sm font-bold text-blue-400">{c.user}</p>
+                            <Link href={`/user/${c.user}`} className="text-sm font-bold text-blue-400">{c.user}</Link>
                             <p className="text-sm text-gray-300 italic">"{c.text}"</p>
                         </div>
                     ))}
