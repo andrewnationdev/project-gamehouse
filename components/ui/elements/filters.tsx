@@ -1,5 +1,5 @@
-import { IFiltersProps } from "../types/genres";
-import { getGenres } from "../utils/genres";
+import { IFiltersProps } from "../../../types/genres";
+import { getGenres } from "../../../utils/genres";
 
 export default function FiltersComponent(props:IFiltersProps) {
     return <div className="flex gap-2 mb-6 flex-wrap overflow-x-auto pb-2">

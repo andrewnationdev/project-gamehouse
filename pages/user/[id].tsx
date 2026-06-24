@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from '../../styles/home.module.css'
-import Layout from "../../components/layout";
+import Layout from "../../components/ui/layout/layout";
 import ProfileComponent from "../../components/screens/profile";
-import LoadingComponent from "../../components/ui/loading";
+import LoadingComponent from "../../components/ui/layout/loading";
 import { useStore } from "../../store/store";
 import { useRouter } from "next/router";
 import { getRandomYear } from "../../utils/data";

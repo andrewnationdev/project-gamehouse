@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { IGameCardProps } from "../../types/games";
-import { truncate } from "../../utils/trunctate";
+import { IGameCardProps } from "../../../types/games";
+import { truncate } from "../../../utils/truncate";
 
 export default function GameCardComponent(props: IGameCardProps) {
     return <Link href={`/games/${props.game.id}`}><div key={props.game.id} className="bg-[#2a475e] p-4 rounded hover:scale-105 transition-transform cursor-pointer shadow-md">

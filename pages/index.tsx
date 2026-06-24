@@ -1,16 +1,16 @@
 import { useState, useMemo, useEffect } from 'react';
 import styles from '../styles/home.module.css'
 import FrontPageComponent from '../components/screens/frontpage';
-import LoadingComponent from '../components/ui/loading';
+import LoadingComponent from '../components/ui/layout/loading';
 import { filterGames } from '../utils/genres';
 import { useStore } from '../store/store';
-import Layout from '../components/layout';
+import Layout from '../components/ui/layout/layout';
 import { fetchGames } from '../services/api';
 import { useQuery } from '@tanstack/react-query';
 import { calculateGamePrice } from '../utils/data';
 
 function Home() {
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState('Todos');
   const { setGames, search, games } = useStore();
 
   const { data, isLoading, isError } = useQuery({

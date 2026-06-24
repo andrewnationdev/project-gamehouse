@@ -1,6 +1,6 @@
 import React from 'react';
 import { AlertCircle, Ghost } from 'lucide-react';
-import { IStatus } from '../../types/screens';
+import { IStatus } from '../../../types/screens';
 
 export default function StatusMessage({ type, message }: IStatus) {
   return (

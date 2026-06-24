@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import Layout from "../../components/layout";
+import Layout from "../../components/ui/layout/layout";
 import styles from '../../styles/home.module.css'
-import LoadingComponent from "../../components/ui/loading";
+import LoadingComponent from "../../components/ui/layout/loading";
 import GameDetailsComponent from "../../components/screens/details";
 import { useStore } from "../../store/store";
 import { useRouter } from "next/router";
 import { useQuery } from '@tanstack/react-query';
 import { fetchGameDetails } from '../../services/api';
 import { IGame } from "../../types/games";
-import StatusMessage from "../../components/ui/status_message";
+import StatusMessage from "../../components/ui/elements/status_message";
 import { calculateGamePrice } from "../../utils/data";
 
 export default function GamesPage() {

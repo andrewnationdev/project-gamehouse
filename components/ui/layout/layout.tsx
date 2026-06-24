@@ -1,7 +1,7 @@
 import NavbarComponent from './navbar';
-import CartDrawerComponent from './ui/cart';
-import { useStore } from '../store/store';
-import FooterComponent from './ui/footer';
+import CartDrawerComponent from '../elements/cart';
+import { useStore } from '../../../store/store';
+import FooterComponent from './footer';
 
 export default function Layout({ children }) {
     const { cart,

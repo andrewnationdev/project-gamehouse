@@ -1,5 +1,5 @@
 import { Trash2, X } from 'lucide-react';
-import { ICartDrawerProps } from '../../types/cart';
+import { ICartDrawerProps } from '../../../types/cart';
 
 export default function CartDrawerComponent(props: ICartDrawerProps) {
   return <div
