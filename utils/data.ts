@@ -12,15 +12,15 @@ export const calculateGamePrice = (releasedDate: string | null): number => {
   return finalPrice;
 };
 
-export function parsePcSpecs(requirementsString: string | undefined | null): string[] | string {
-  if (!requirementsString) return "Não informado";
+export function parsePcSpecs(requirementsString: string | undefined | null): string[] {
+  if (!requirementsString) return ["Não informado"];
 
-  const regex = /Minimum:|Processor:|Memory:|Graphics:|Storage:|Additional Notes:/gi;
+  const regex = /Minimum:|Processor:|Memory:|Graphics:|Storage:|Network:|CPU:|Video Card:|Sound Card:|Additional Notes:/gi;
 
   const specsArray = requirementsString
     .split(regex)
     .map(item => item.trim())
     .filter(item => item.length > 0);
 
-  return specsArray.length > 0 ? specsArray : "Não informado";
+  return specsArray.length > 0 ? specsArray : ["Não informado"];
 }
