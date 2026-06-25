@@ -6,6 +6,7 @@ import LoadingComponent from "../../components/ui/layout/loading";
 import { useStore } from "../../store/store";
 import { useRouter } from "next/router";
 import { getRandomYear } from "../../utils/data";
+import UserPlayedGamesComponent from "../../components/ui/elements/played_games";
 
 export default function ProfilePages() {
     const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,10 @@ export default function ProfilePages() {
                     {isLoading ? (
                         <LoadingComponent />
                     ) : (
-                        <ProfileComponent username={String(id)} memberSince={getRandomYear()} />
+                        <>
+                            <ProfileComponent username={String(id)} memberSince={getRandomYear()} />
+                            <UserPlayedGamesComponent userId={String(id)} />
+                        </>
                     )}
                 </div>
             </div>

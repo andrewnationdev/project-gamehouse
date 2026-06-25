@@ -1,4 +1,4 @@
-import { ChevronLeft, Star } from "lucide-react";
+import { ChevronLeft, ShoppingCart, Star } from "lucide-react";
 import { IGame } from "../../types/games";
 import Link from "next/link";
 import { useStore } from "../../store/store";
@@ -32,8 +32,8 @@ export default function GameDetailsComponent(props: IGame) {
                 <button
                     disabled={isAlreadyInCart()}
                     onClick={() => props.handleAddToCart(props)}
-                    className={`px-8 py-3 rounded font-bold text-white shadow-lg ${isAlreadyInCart() ? "bg-green-900 cursor-not-allowed" : "bg-green-600 px-8 py-3 cursor-pointer rounded font-bold text-white hover:bg-green-500 transition"}`}>
-                    Adicionar ao Carrinho
+                    className={`px-8 py-3 flex items-center justify-center rounded font-bold text-white shadow-lg ${isAlreadyInCart() ? "bg-green-900 cursor-not-allowed" : "bg-green-600 px-8 py-3 cursor-pointer rounded font-bold text-white hover:bg-green-500 transition"}`}>
+                    {isAlreadyInCart() ? "Adicionado" : <ShoppingCart size={20} className="inline-block mr-2" />}
                 </button>
             </div>
 
